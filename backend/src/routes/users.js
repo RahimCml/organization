@@ -130,4 +130,25 @@ router.post(
   }
 )
 
+router.post('/invite/superAdmin', async (req, res) => {
+  const data = req.body
+  const Id = uuid.v4()
+  const invite = await superAdmin.findByIdAndUpdate(data.superAdminId, {
+    $push: {
+      superAdminInviteId: Id,
+    },
+  })
+  res.send(Id)
+})
+router.post('/invite/organizationAdmin', async (req, res) => {
+  const data = req.body
+  const Id = uuid.v4()
+  const invite = await superAdmin.findByIdAndUpdate(data.superAdminId, {
+    $push: {
+      organizationAdminInviteId: Id,
+    },
+  })
+  res.send(Id)
+})
+
 module.exports = router
