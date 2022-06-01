@@ -7,7 +7,9 @@
   "extends": ["airbnb", "prettier", "prettier/standard"],
   "rules": {
     "eqeqeq": "off",
-    "class-methods-use-this": "off"
+    "class-methods-use-this": "off",
+    "no-underscore-dangle": "error",
+
   },
   "settings": {
     "react": {
