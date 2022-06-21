@@ -7,6 +7,7 @@ Vue.use(Vuex)
 const mutations = {
   SET_USER: 'user',
   INVITEID: 'inviteId',
+  VALIDINVITE: 'validInvite',
 }
 export default new Vuex.Store({
   state: {
@@ -17,8 +18,11 @@ export default new Vuex.Store({
     [mutations.SET_USER](state, user) {
       state.user = user
     },
-    [mutations.SET_USER](state, user) {
-      state.user = user
+    [mutations.INVITEID](state, inviteId) {
+      state.inviteId = inviteId
+    },
+    [mutations.VALIDINVITE](state, validInvite) {
+      state.validInvite = validInvite
     },
   },
   actions: {
@@ -42,6 +46,14 @@ export default new Vuex.Store({
     async invitedOrganizationAdmin({ commit }, { superAdminId }) {
       const res = await axios.post('/api/users/invite/organizationAdmin', { superAdminId })
       commit(mutations.INVITEID, res.data)
+    },
+    async checkInviteCodeForSuperAdmin({ commit }, { inviteCode }) {
+      const res = await axios.post('/api/users/checkInviteCodeForSuperAdmin', { inviteCode })
+      commit(mutations.VALIDINVITE, res.data)
+    },
+    async checkInviteCodeForOrganizationAdmin({ commit }, { inviteCode }) {
+      const res = await axios.post('/api/users/checkInviteCodeForOrganization', { inviteCode })
+      commit(mutations.VALIDINVITE, res.data)
     },
   },
   modules: {},

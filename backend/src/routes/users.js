@@ -140,6 +140,7 @@ router.post('/invite/superAdmin', async (req, res) => {
   })
   res.send(Id)
 })
+
 router.post('/invite/organizationAdmin', async (req, res) => {
   const data = req.body
   const Id = uuid.v4()
@@ -151,4 +152,25 @@ router.post('/invite/organizationAdmin', async (req, res) => {
   res.send(Id)
 })
 
+router.post('/checkInviteCodeForSuperAdmin', async (req, res) => {
+  const checkCodeForSuperAdmin = await superAdmin.findOne({ superAdminInviteId: req.body.inviteCode })
+  if (checkCodeForSuperAdmin.superAdminInviteId) {
+    const superadmin = 'SuperAdmin'
+    res.send(superadmin)
+  }
+  if (checkCodeForSuperAdmin.superAdminInviteId == null) {
+    res.sendStatus(404)
+  }
+})
+
+router.post('/checkInviteCodeForOrganization', async (req, res) => {
+  const checkCodeForOrganizationAdmin = await superAdmin.findOne({ organizationAdminInviteId: req.body.inviteCode })
+  if (checkCodeForOrganizationAdmin.organizationAdminInviteId) {
+    const organizationAdmin = 'OrganizationAdmin'
+    res.send(organizationAdmin)
+  }
+  if (checkCodeForOrganizationAdmin.organizationAdminInviteId == null) {
+    res.sendStatus(404)
+  }
+})
 module.exports = router

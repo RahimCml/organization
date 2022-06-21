@@ -6,6 +6,7 @@ import Login from '../views/login.vue'
 import OrganizationAdminControl from '../views/organizationAdminControl.vue'
 import User from '../views/user.vue'
 import SuperAdminControl from '../views/superAdminControl.vue'
+import Invite from '../views/invite.vue'
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,11 @@ const routes = [
     path: '/superAdminControl',
     name: 'SuperAdminControl',
     component: SuperAdminControl,
+  },
+  {
+    path: '/invite',
+    name: 'Invite',
+    component: Invite,
   },
   {
     path: '/about',

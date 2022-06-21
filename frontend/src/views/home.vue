@@ -16,7 +16,6 @@ export default {
 
 <template lang="pug">
 .home
-  div
   div(v-if="user")
     h1 welcome {{user.name}}
     a-row.grid(v-if="user.title == 'SuperAdmin'")
@@ -28,6 +27,9 @@ export default {
       a-col.gridCol <router-link to="/user"> User </router-link>
     a-row.grid(v-if="user.title == 'User'")
       a-col.gridCol <router-link to="/user"> User </router-link>
+  div(v-else)
+    span Do you have invite code for registering
+      <router-link to="/invite"> Go </router-link>
 </template>
 
 <style land="scss" scoped>
