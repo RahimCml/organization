@@ -13,11 +13,14 @@ export default {
       this.loading = true
   },
   methods: {
-    ...mapActions(['fetchUser', 'fetchTeam', 'joinUser']),
+    ...mapActions(['fetchUser', 'fetchTeam', 'joinUser', 'deletedUser']),
     addUser(userdata) {
       this.joinUser({teamId: this.$route.params.id, userId: userdata._id})
       this.loading = true
     },
+    deleteUser(teamdata) {
+      this.deletedUser({userId: teamdata._id})
+    }
   },
   computed: {
     ...mapState(['userData', 'user', 'teamData'])
@@ -31,6 +34,7 @@ export default {
     h1 name of team {{teamData.name}}
   div(v-for="teamdata in teamData.users" :key="teamdata.name")
     h1 consists of {{teamdata.name}}
+    a-button(v-if="user.title == 'SuperAdmin'" v-on:click="deleteUser(teamdata)")
   div( v-if="user.title == 'SuperAdmin' || user.title == 'OrgazinationAdmin' " v-for="userdata in userData" :key="userdata.name")
     h1 {{userdata.name}}
     a-button(type="primary" v-on:click="addUser(userdata)") Add

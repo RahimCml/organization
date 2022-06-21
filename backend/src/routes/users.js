@@ -223,4 +223,17 @@ router.post('/deleteTeam', async (req, res) => {
   data.remove()
 })
 
+router.post('/deleteUser', async (req, res) => {
+  const { userId, teamId } = await req.body
+  try {
+    const user = await User.findById({ _id: userId })
+    const data = await Team.findByIdAndUpdate(teamId, {
+      $pull: {
+        users: user,
+      },
+    })
+  } catch (e) {
+    console.log(e.message)
+  }
+})
 module.exports = router

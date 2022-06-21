@@ -82,8 +82,8 @@ export default new Vuex.Store({
       const res = await axios.post('/api/users/fetchTeam', { teamId })
       commit(mutations.FETCH_TEAM, res.data)
     },
-    async deletedTeam(ctx, {teamId}) {
-      return await axios.post('api/users/deleteTeam', {teamId})
+    async deletedTeam(ctx, { teamId }) {
+      return await axios.post('api/users/deleteTeam', { teamId })
     },
     async fetchUser({ commit }) {
       const res = await axios.post('/api/users/fetchUser')
@@ -91,6 +91,9 @@ export default new Vuex.Store({
     },
     async joinUser(ctx, { teamId, userId }) {
       return await axios.post('/api/users/joinUser', { teamId, userId })
+    },
+    async deletedUser(ctx, { userId }) {
+      return await axios.post('api/users/deleteUser', { userId })
     },
   },
   modules: {},
