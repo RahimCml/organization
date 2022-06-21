@@ -8,11 +8,13 @@ const mutations = {
   SET_USER: 'user',
   INVITEID: 'inviteId',
   VALIDINVITE: 'validInvite',
+  TEAMS: 'teams',
 }
 export default new Vuex.Store({
   state: {
     user: null,
     inviteId: null,
+    teams: '',
   },
   mutations: {
     [mutations.SET_USER](state, user) {
@@ -23,6 +25,9 @@ export default new Vuex.Store({
     },
     [mutations.VALIDINVITE](state, validInvite) {
       state.validInvite = validInvite
+    },
+    [mutations.TEAMS](state, teams) {
+      state.teams = teams
     },
   },
   actions: {
@@ -54,6 +59,13 @@ export default new Vuex.Store({
     async checkInviteCodeForOrganizationAdmin({ commit }, { inviteCode }) {
       const res = await axios.post('/api/users/checkInviteCodeForOrganization', { inviteCode })
       commit(mutations.VALIDINVITE, res.data)
+    },
+    async createNewTeam(ctx, { teamName, superAdminId }) {
+      return await axios.post('/api/users/createNewTeam', { teamName, superAdminId })
+    },
+    async postTeams({ commit }) {
+      const res = await axios.post('/api/users/postTeams')
+      commit(mutations.TEAMS, res.data)
     },
   },
   modules: {},

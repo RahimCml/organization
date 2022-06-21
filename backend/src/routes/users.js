@@ -173,4 +173,22 @@ router.post('/checkInviteCodeForOrganization', async (req, res) => {
     res.sendStatus(404)
   }
 })
+
+router.post('/createNewTeam', async (req, res) => {
+  const data = { name: req.body.teamName }
+  const created = await new Team(data)
+  await created.save()
+  const catched = await superAdmin.findByIdAndUpdate(req.body.superAdminId, {
+    $push: {
+      teams: created.id,
+    },
+  })
+  res.send(catched)
+})
+
+router.post('/postTeams', async (req, res) => {
+  const find = await superAdmin.findOne({})
+  const data = JSON.parse(JSON.stringify(find.teams))
+  res.send(data)
+})
 module.exports = router
