@@ -82,6 +82,9 @@ export default new Vuex.Store({
       const res = await axios.post('/api/users/fetchTeam', { teamId })
       commit(mutations.FETCH_TEAM, res.data)
     },
+    async deletedTeam(ctx, {teamId}) {
+      return await axios.post('api/users/deleteTeam', {teamId})
+    },
     async fetchUser({ commit }) {
       const res = await axios.post('/api/users/fetchUser')
       commit(mutations.FETCH_USER, res.data)

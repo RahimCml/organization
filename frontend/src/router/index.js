@@ -7,6 +7,8 @@ import OrganizationAdminControl from '../views/organizationAdminControl.vue'
 import User from '../views/user.vue'
 import SuperAdminControl from '../views/superAdminControl.vue'
 import Invite from '../views/invite.vue'
+import Team from '../views/team.vue'
+
 
 Vue.use(VueRouter)
 
@@ -45,6 +47,11 @@ const routes = [
     path: '/invite',
     name: 'Invite',
     component: Invite,
+  },
+  {
+    path: `/team/:id`,
+    name: 'Team',
+    component: Team,
   },
   {
     path: '/about',

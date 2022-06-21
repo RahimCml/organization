@@ -12,7 +12,7 @@ export default {
     this.postTeams()
   },
   methods: {
-    ...mapActions(['invitedSuperAdmin', 'invitedOrganizationAdmin', 'createNewTeam', 'postTeams']),
+    ...mapActions(['invitedSuperAdmin', 'invitedOrganizationAdmin', 'createNewTeam', 'postTeams', 'deletedTeam']),
     async inviteSuperAdmin() {
       this.invitedSuperAdmin({superAdminId: this.user._id})
     },
@@ -22,6 +22,9 @@ export default {
     async createTeam() {
       this.createNewTeam({teamName: this.teamName, superAdminId: this.user._id})
     },
+    async deleteTeam(team) {
+      this.deletedTeam({teamId: team._id})
+    }
   },
   computed: {
     ...mapState(['user', 'inviteId', 'teams'])
@@ -37,8 +40,8 @@ export default {
     a-button(type="primary" @click="inviteOrganizationAdmin" :loading='loading') Invite Organization Admin
     span {{inviteId}}
   div(v-for="team in teams" :key="team.name")
-    h1 team
-    span {{team.name}}
+    router-link(:to='`/team/${team._id}`') {{team.name}}
+    a-button(type="primary" v-on:click="deleteTeam(team)") Delete
   div Create new team
     a-input(placeholder="Team name..." v-model="teamName")
     a-button(type="primary" @click="createTeam" :loading='loading') Create

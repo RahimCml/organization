@@ -217,4 +217,10 @@ router.post('/joinUser', async (req, res) => {
   })
   res.sendStatus(200)
 })
+
+router.post('/deleteTeam', async (req, res) => {
+  const data = await Team.findById(req.body.teamId)
+  data.remove()
+})
+
 module.exports = router
