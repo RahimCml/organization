@@ -197,4 +197,8 @@ router.post('/fetchTeam', async (req, res) => {
   res.send(team)
 })
 
+router.post('/fetchUser', async (req, res) => {
+  const user = await User.find()
+  res.send(user)
+})
 module.exports = router

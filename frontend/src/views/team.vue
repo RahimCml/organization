@@ -8,14 +8,15 @@ export default {
     }
   },
     created() {
+      this.fetchUser()
       this.fetchTeam({teamId: this.$route.params.id})
       this.loading = true
   },
   methods: {
-    ...mapActions(['fetchTeam']),
+    ...mapActions(['fetchUser', 'fetchTeam']),
   },
   computed: {
-    ...mapState(['teamData'])
+    ...mapState(['userData', 'user', 'teamData'])
   }
 }
 </script>
@@ -26,4 +27,6 @@ export default {
     h1 name of team {{teamData.name}}
   div(v-for="teamdata in teamData.users" :key="teamdata.name")
     h1 consists of {{teamdata.name}}
+  div( v-if="user.title == 'SuperAdmin' || user.title == 'OrgazinationAdmin' " v-for="userdata in userData" :key="userdata.name")
+    h1 {{userdata.name}}
 </template>
