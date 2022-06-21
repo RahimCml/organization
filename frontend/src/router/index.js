@@ -1,11 +1,44 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 import Home from '../views/home.vue'
+import Register from '../views/register.vue'
+import Login from '../views/login.vue'
+import OrganizationAdminControl from '../views/organizationAdminControl.vue'
+import User from '../views/user.vue'
+import SuperAdminControl from '../views/superAdminControl.vue'
+
+Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home,
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+  },
+  {
+    path: '/organizationAdminControl',
+    name: 'OrganizationAdminControl',
+    component: OrganizationAdminControl,
+  },
+  {
+    path: '/user',
+    name: 'User',
+    component: User,
+  },
+  {
+    path: '/superAdminControl',
+    name: 'SuperAdminControl',
+    component: SuperAdminControl,
   },
   {
     path: '/about',
@@ -17,8 +50,9 @@ const routes = [
   },
 ]
 
-const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
   routes,
 })
 
