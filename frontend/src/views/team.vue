@@ -13,7 +13,11 @@ export default {
       this.loading = true
   },
   methods: {
-    ...mapActions(['fetchUser', 'fetchTeam']),
+    ...mapActions(['fetchUser', 'fetchTeam', 'joinUser']),
+    addUser(userdata) {
+      this.joinUser({teamId: this.$route.params.id, userId: userdata._id})
+      this.loading = true
+    },
   },
   computed: {
     ...mapState(['userData', 'user', 'teamData'])
@@ -29,4 +33,5 @@ export default {
     h1 consists of {{teamdata.name}}
   div( v-if="user.title == 'SuperAdmin' || user.title == 'OrgazinationAdmin' " v-for="userdata in userData" :key="userdata.name")
     h1 {{userdata.name}}
+    a-button(type="primary" v-on:click="addUser(userdata)") Add
 </template>

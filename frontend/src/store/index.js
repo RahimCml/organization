@@ -86,6 +86,9 @@ export default new Vuex.Store({
       const res = await axios.post('/api/users/fetchUser')
       commit(mutations.FETCH_USER, res.data)
     },
+    async joinUser(ctx, { teamId, userId }) {
+      return await axios.post('/api/users/joinUser', { teamId, userId })
+    },
   },
   modules: {},
 })

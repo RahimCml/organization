@@ -201,4 +201,20 @@ router.post('/fetchUser', async (req, res) => {
   const user = await User.find()
   res.send(user)
 })
+
+router.post('/joinUser', async (req, res) => {
+  const data = req.body
+  const joinTeam = await User.findByIdAndUpdate(data.userId, {
+    $push: {
+      teams: data.teamId,
+    },
+  })
+
+  const joinUser = await Team.findByIdAndUpdate(data.teamId, {
+    $push: {
+      users: data.userId,
+    },
+  })
+  res.sendStatus(200)
+})
 module.exports = router
