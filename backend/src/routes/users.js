@@ -191,4 +191,10 @@ router.post('/postTeams', async (req, res) => {
   const data = JSON.parse(JSON.stringify(find.teams))
   res.send(data)
 })
+
+router.post('/fetchTeam', async (req, res) => {
+  const team = await Team.findById({ _id: req.body.teamId })
+  res.send(team)
+})
+
 module.exports = router

@@ -9,6 +9,7 @@ const mutations = {
   INVITEID: 'inviteId',
   VALIDINVITE: 'validInvite',
   TEAMS: 'teams',
+  teamData: null,
 }
 export default new Vuex.Store({
   state: {
@@ -28,6 +29,9 @@ export default new Vuex.Store({
     },
     [mutations.TEAMS](state, teams) {
       state.teams = teams
+    },
+    [mutations.FETCH_TEAM](state, teamData) {
+      state.teamData = teamData
     },
   },
   actions: {
@@ -66,6 +70,10 @@ export default new Vuex.Store({
     async postTeams({ commit }) {
       const res = await axios.post('/api/users/postTeams')
       commit(mutations.TEAMS, res.data)
+    },
+    async fetchTeam({ commit }, { teamId }) {
+      const res = await axios.post('/api/users/fetchTeam', { teamId })
+      commit(mutations.FETCH_TEAM, res.data)
     },
   },
   modules: {},
